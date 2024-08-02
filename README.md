@@ -20,7 +20,17 @@ $ uniquekmer -f R2_Reverse_P7_301cycles.fasta -k 15 -o "kmercollection_R2"
 
 Step 2) If a 15 mer ID for one domain had a hamming distance of less than 2 with an ID from another domain, one of the IDs was deleted from the domain with a larger number of IDs by executing Library1_step2.py. Output files were numerically sorted using Seqkit with the following commands.
 
+
 '''bash
-	$ seqkit sort -nN R1_15mer_HD2_UMIs.fasta -o R1_15mer_HD2_UMIs_sorted.fasta
-	$ seqkit sort -nN R2_15mer_HD2_UMIs.fasta -o R2_15mer_HD2_UMIs_sorted.fasta
+$ seqkit sort -nN R1_15mer_HD2_UMIs.fasta -o R1_15mer_HD2_UMIs_sorted.fasta
+$ seqkit sort -nN R2_15mer_HD2_UMIs.fasta -o R2_15mer_HD2_UMIs_sorted.fasta
  '''
+
+
+Step 3) Using pairwise2 (Biopython) local alignment mode with the scoring scheme of (match: 1, mismatch: 0, opening gap: -1, extending gap: -1), IDs that had an alignment score higher than 12 with any other domains’ expected 301 bp NGS reads were removed. Also, 10 IDs were chosen to be spread across the 301 bp region as evenly as possible by executing Library1_step3.py. 
+
+
+Step 4) For domains that ended up with fewer than 10 IDs, previously removed IDs with alignment scores (pairwise2) of 13 were recalled and assigned to ensure that the total number of IDs reached 10 for every domain by executing Library1_step4.py.
+
+
+Finally, 10 IDs (R1_15mer_UMIs_10per_effector.fasta and R2_15mer_UMIs_10per_effector.fasta) were generated for each domain.
