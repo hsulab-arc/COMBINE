@@ -1,9 +1,9 @@
-### A combinatorial domain screening platform reveals epigenetic effector interactions for transcriptional perturbation
+## A combinatorial domain screening platform reveals epigenetic effector interactions for transcriptional perturbation
 
 Additional data and codes to accompany the preprint 
 
 
-#### Generating unique 15-mer IDs for Library 1 NGS analysis
+### Generating unique 15-mer IDs for Library 1 NGS analysis
 
 
 Follow with the example data - 
