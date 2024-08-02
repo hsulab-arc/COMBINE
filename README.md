@@ -33,4 +33,4 @@ Step 3) Using pairwise2 (Biopython) local alignment mode with the scoring scheme
 Step 4) For domains that ended up with fewer than 10 IDs, previously removed IDs with alignment scores (pairwise2) of 13 were recalled and assigned to ensure that the total number of IDs reached 10 for every domain by executing Library1_step4.py.
 
 
-Finally, 10 IDs (R1_15mer_UMIs_10per_effector.fasta & R2_15mer_UMIs_10per_effector.fasta) were generated for each domain.
+10 IDs (R1_15mer_UMIs_10per_effector.fasta & R2_15mer_UMIs_10per_effector.fasta) got generated for each domain.
