@@ -3,7 +3,7 @@
 Additional data and codes to accompany the preprint 
 
 
-### - Generating unique 15-mer IDs for Library 1 NGS analysis
+### Generating unique 15-mer IDs for Library 1 NGS analysis
 
 ####   - Requirements
 
