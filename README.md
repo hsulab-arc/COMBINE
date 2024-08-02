@@ -17,3 +17,10 @@ $ uniquekmer -f R1_Forward_P5_301cycles.fasta -k 15 -o "kmercollection_R1"
 $ uniquekmer -f R2_Reverse_P7_301cycles.fasta -k 15 -o "kmercollection_R2"
 ```
 
+
+Step 2) If a 15 mer ID for one domain had a hamming distance of less than 2 with an ID from another domain, one of the IDs was deleted from the domain with a larger number of IDs by executing Library1_step2.py. Output files were numerically sorted using Seqkit with the following commands.
+
+'''bash
+	$ seqkit sort -nN R1_15mer_HD2_UMIs.fasta -o R1_15mer_HD2_UMIs_sorted.fasta
+	$ seqkit sort -nN R2_15mer_HD2_UMIs.fasta -o R2_15mer_HD2_UMIs_sorted.fasta
+ '''
