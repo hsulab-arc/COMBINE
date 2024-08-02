@@ -23,7 +23,7 @@ To address the issue of lower R2 sequencing quality, which is occasionally obser
 
 
 
-* Step 1) From fasta files composed of expected 301 bp NGS reads for every domain (R1_Forward_P5_301cycles.fasta & R2_Reverse_P7_301cycles.fasta), all possible unique 15 mers were generated using UniqueKMER[^1] with the following commands. 
+* Step 1) From fasta files composed of expected 301 bp NGS reads for every domain (R1_Forward_P5_301cycles.fasta & R2_Reverse_P7_301cycles.fasta), all possible unique 15 mers were generated using UniqueKMER[^1] with the following commands.(~45 min)
 [^1]: Chen, S., He, C., Li, Y., Li, Z., and Melançon, C.E. (2021). A computational toolset for rapid identification of SARS-CoV-2, other viruses and microorganisms from sequencing data. Brief. Bioinform. 22, 924–935.
 
 ```bash
