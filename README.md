@@ -9,7 +9,7 @@ Additional data and codes to accompany the preprint
 
 ####   - Requirements
 
-Biopython(1.84), UniqueKMER(0.1.0)[^1], SeqKit2[^2]
+Biopython(v1.84), UniqueKMER(v0.1.0)[^1], SeqKit2(v2.8.2)[^2]
 
 
 
