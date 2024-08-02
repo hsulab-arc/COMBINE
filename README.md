@@ -24,6 +24,7 @@ $ uniquekmer -f R2_Reverse_P7_301cycles.fasta -k 15 -o "kmercollection_R2"
 
 
 * Step 2) If a 15 mer ID for one domain had a hamming distance of less than 2 with an ID from another domain, one of the IDs was deleted from the domain with a larger number of IDs by executing Library1_step2.py. Output files were numerically sorted using Seqkit with the following commands[^2].
+[^2]: Chen, S., He, C., Li, Y., Li, Z., and Melançon, C.E. (2021). A computational toolset for rapid identification of SARS-CoV-2, other viruses and microorganisms from sequencing data. Brief. Bioinform. 22, 924–935.
 
 
 ```bash
