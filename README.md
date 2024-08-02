@@ -3,12 +3,13 @@
 Additional data and codes to accompany the preprint 
 
 
-### Generating unique 15-mer IDs for Library 1 NGS analysis
+### * Generating unique 15-mer IDs for Library 1 NGS analysis
 
 #### Requirements
 
 Biopython, UniqueKMER[^1], SeqKit2[^2]
 
+#### Example run
 
 Follow with the example data - 
 
