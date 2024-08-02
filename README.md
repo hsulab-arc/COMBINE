@@ -40,4 +40,5 @@ $ seqkit sort -nN R2_15mer_HD2_UMIs.fasta -o R2_15mer_HD2_UMIs_sorted.fasta
 
 
 10 IDs got generated for each domain.
-(R1_15mer_UMIs_10per_effector.fasta & R2_15mer_UMIs_10per_effector.fasta)
+* R1_15mer_UMIs_10per_effector.fasta
+* R2_15mer_UMIs_10per_effector.fasta)
