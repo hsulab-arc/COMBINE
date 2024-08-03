@@ -43,7 +43,7 @@ $ seqkit sort -nN R2_15mer_HD2_UMIs.fasta -o R2_15mer_HD2_UMIs_sorted.fasta
 
 
 
-* Step 3) Using pairwise2 (Biopython) local alignment mode with the scoring scheme of (match: 1, mismatch: 0, opening gap: -1, extending gap: -1), IDs that had an alignment score higher than 12 with any other domains’ expected 301 bp NGS reads were removed. Also, 10 IDs were chosen to be spread across the 301 bp region as evenly as possible by executing Library1_step3.py. 
+* Step 3) Using pairwise2 (Biopython) local alignment mode with the scoring scheme of (match: 1, mismatch: 0, opening gap: -1, extending gap: -1), IDs that had an alignment score higher than 12 with any other domains’ expected 301 bp NGS reads were removed. Also, 10 IDs were chosen to be spread across the 301 bp region as evenly as possible by executing Library1_step3.py.  (~25 min)
 
 
 
