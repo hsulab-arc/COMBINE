@@ -16,9 +16,9 @@ class BatchSequenceMapper:
     def __init__(self):
         # Previous initialization code remains the same
         self.cutadapt_path = str(Path('~/.local/bin/cutadapt').expanduser())
-        self.minimap2_path = str(Path('~/20241202_template_switch_revision/Nanopore/minimap2-2.28_x64-linux/minimap2').expanduser())
-        self.ref_path_r1 = str(Path('~/20241217_reanalyze_minimap2/R1_Forward_P5_301cycles.fasta').expanduser())
-        self.ref_path_r2 = str(Path('~/20241217_reanalyze_minimap2/R2_Reverse_P7_301cycles.fasta').expanduser())
+        self.minimap2_path = str(Path('~/20250210_revision_code_depository/minimap2-2.28_x64-linux/minimap2').expanduser())
+        self.ref_path_r1 = str(Path('~/20250210_revision_code_depository/R1_Forward_P5_301cycles.fasta').expanduser())
+        self.ref_path_r2 = str(Path('~/20250210_revision_code_depository/R2_Reverse_P7_301cycles.fasta').expanduser())
         
         os.makedirs('mapped', exist_ok=True)
         os.makedirs('output_csv', exist_ok=True)
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     main()
 
 class PairedCSVProcessor:
-    def __init__(self, input_dir: str = 'output_csv_test', output_dir: str = 'count_matrices_test'):
+    def __init__(self, input_dir: str = 'output_csv', output_dir: str = 'count_matrices'):
         """
         Initialize the processor
         
