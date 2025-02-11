@@ -72,7 +72,7 @@ The pipeline expects paired-end read files to follow this naming convention:
 2. Count Matrices:
    - CSV files containing count matrices for each paired set of reads
    - Matrix dimensions: 156 x 156
-   - Each cell represents the count of specific vector combinations
+   - Each cell represents the count of specific bivalent domain combinations
 
 ## Description of additional files
 
