@@ -108,6 +108,4 @@ Library 1/raw_fastq/
 2. Check results in `count_matrices` folder (process takes ~10 seconds)
 
 ### Citations
-Martin, M. (2011). Cutadapt removes adapter sequences from high-throughput sequencing reads. EMBnet. journal, 17(1), 10-12.
-
 Li, H. (2018). Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics, 34:3094-3100. doi:10.1093/bioinformatics/bty191
