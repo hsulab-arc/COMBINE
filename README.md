@@ -43,6 +43,7 @@ Follow the installation instructions at: https://cutadapt.readthedocs.io/en/stab
 4. Install minimap2:
 Follow the installation instructions at: https://github.com/lh3/minimap2
 
+   - Note: Move minimap2 to Library 1/minimap2-2.28_x64-linux/minimap2 to run the example dataset.
 
 ## 📁 Directory Structure
 
@@ -86,9 +87,9 @@ Before running the pipeline, adjust the following file paths in the code accordi
 ```python
 # In BatchSequenceMapper class:
 self.cutadapt_path = str(Path('~/.local/bin/cutadapt').expanduser())
-self.minimap2_path = str(Path('~/path/to/minimap2-2.28_x64-linux/minimap2').expanduser())
-self.ref_path_r1 = str(Path('~/path/to/R1_Forward_P5_301cycles.fasta').expanduser())
-self.ref_path_r2 = str(Path('~/path/to/R2_Reverse_P7_301cycles.fasta').expanduser())
+self.minimap2_path = str(Path('./minimap2-2.28_x64-linux/minimap2').expanduser())
+self.ref_path_r1 = str(Path('./R1_Forward_P5_301cycles.fasta').expanduser())
+self.ref_path_r2 = str(Path('./R2_Reverse_P7_301cycles.fasta').expanduser())
 ```
 
 ### Example Dataset
