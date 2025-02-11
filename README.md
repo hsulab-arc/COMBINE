@@ -37,6 +37,10 @@ pip install numpy pandas pathlib IPython
 ```
 
 3. Install minimap2:
+```bash
+curl -L https://github.com/lh3/minimap2/releases/download/v2.28/minimap2-2.28_x64-linux.tar.bz2 | tar -jxvf -
+./minimap2-2.28_x64-linux/minimap2
+```
 Follow the installation instructions at: https://github.com/lh3/minimap2
 
    - Note: Move minimap2 to Library 1/minimap2-2.28_x64-linux/minimap2 to run the example dataset.
