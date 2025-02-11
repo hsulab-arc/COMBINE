@@ -48,12 +48,10 @@ Follow the installation instructions at: https://github.com/lh3/minimap2
 ## 📁 Directory Structure
 
 ```
-.
-├── raw_fastq/          # Input directory for FASTQ files
-├── mapped/            # Directory for processed FASTQ files
-├── output_csv/        # Directory for mapping results
-├── debug_logs/        # Directory for debug information
-└── count_matrices/    # Directory for final count matrices
+Library 1/
+├── Minimap_batch_Lib1.py
+├── minimap2-2.28_x64-linux/
+└── raw_fastq/            
 ```
 
 ## 📝 File Naming Convention
@@ -82,7 +80,7 @@ The pipeline expects paired-end read files to follow this naming convention:
 ## 🚀 Quick Start with Example Dataset
 
 ### Configure File Paths
-Before running the pipeline, adjust the following file paths in the code according to your system setup:
+Before running the pipeline, adjust the following file paths in the code according to your system setup if necessary:
 
 ```python
 # In BatchSequenceMapper class:
@@ -103,7 +101,7 @@ Library 1/raw_fastq/
 ```
 
 ### Running the Example
-1. Run `python Minimap_batch_Lib1.py` after adjusting file paths
+1. Run `python Minimap_batch_Lib1.py`
 2. Check results in `count_matrices` folder (process takes ~10 seconds)
 
 ### Citations
