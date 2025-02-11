@@ -13,7 +13,6 @@ A Python-based pipeline for processing and analyzing paired-end NGS (Next-Genera
 
 ### Tested on
 - Python 3.10 
-- cutadapt v4.9
 - minimap2 v2.28
 
 ### Python Packages
@@ -37,10 +36,7 @@ cd COMBINE
 pip install numpy pandas pathlib IPython
 ```
 
-3. Install cutadapt:
-Follow the installation instructions at: https://cutadapt.readthedocs.io/en/stable/installation.html
-
-4. Install minimap2:
+3. Install minimap2:
 Follow the installation instructions at: https://github.com/lh3/minimap2
 
    - Note: Move minimap2 to Library 1/minimap2-2.28_x64-linux/minimap2 to run the example dataset.
