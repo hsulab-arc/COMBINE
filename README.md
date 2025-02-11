@@ -93,9 +93,9 @@ self.ref_path_r2 = str(Path('./R2_Reverse_P7_301cycles.fasta').expanduser())
 ```
 
 ### Example Dataset
-Example dataset is provided in `Library 1/example dataset`:
+Example dataset is provided in `Library 1/raw_fastq`:
 ```
-Library 1/example dataset/
+Library 1/raw_fastq/
 ├── subset_D6_R1_CD81_High_S1_L001_R1_001.fastq.gz
 ├── subset_D6_R1_CD81_High_S1_L001_R2_001.fastq.gz
 ├── subset_D6_R1_CD81_Repressed_S2_L001_R1_001.fastq.gz
@@ -103,9 +103,8 @@ Library 1/example dataset/
 ```
 
 ### Running the Example
-1. Copy the example files to `raw_fastq` directory
-2. Run `python Minimap_batch_Lib1.py` after adjusting file paths
-3. Check results in `count_matrices` folder (process takes ~10 seconds)
+1. Run `python Minimap_batch_Lib1.py` after adjusting file paths
+2. Check results in `count_matrices` folder (process takes ~10 seconds)
 
 ### Citations
 Martin, M. (2011). Cutadapt removes adapter sequences from high-throughput sequencing reads. EMBnet. journal, 17(1), 10-12.
