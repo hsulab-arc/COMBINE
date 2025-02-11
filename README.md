@@ -2,7 +2,7 @@
 
 Additional data and codes to accompany the preprint: [https://www.biorxiv.org/content/10.1101/2024.10.28.620683v2](https://www.biorxiv.org/content/10.1101/2024.10.28.620683v2)
 
-# NGS Read Mapping and Analysis Pipeline
+# NGS Read Mapping and Analysis Pipeline (Library 1)
 
 [![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
@@ -71,6 +71,12 @@ The pipeline expects paired-end read files to follow this naming convention:
    - CSV files containing count matrices for each paired set of reads
    - Matrix dimensions: 156 x 156
    - Each cell represents the count of specific vector combinations
+
+## Description of additional files
+
+![Description](./Library%201/Lib1_bivalent_effectors.png)
+
+
 
 ## 🚀 Quick Start with Example Dataset
 
