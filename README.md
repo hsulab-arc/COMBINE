@@ -49,9 +49,12 @@ Follow the installation instructions at: https://github.com/lh3/minimap2
 
 ```
 Library 1/
-├── Minimap_batch_Lib1.py
 ├── minimap2-2.28_x64-linux/
-└── raw_fastq/            
+├── raw_fastq/  
+├── Lib1_bivalent_effectors.png
+├── Minimap_batch_Lib1.py
+├── R1_Forward_P5_301cycles.fasta
+└── R2_Reverse_P7_301cycles.fasta           
 ```
 
 ## 📝 File Naming Convention
