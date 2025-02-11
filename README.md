@@ -43,7 +43,7 @@ curl -L https://github.com/lh3/minimap2/releases/download/v2.28/minimap2-2.28_x6
 ```
 Follow the installation instructions at: https://github.com/lh3/minimap2
 
-   - Note: Move minimap2 to Library 1/minimap2-2.28_x64-linux/minimap2 to run the example dataset.
+   - Note: Move minimap2-2.28_x64-linux folder to Library 1/minimap2-2.28_x64-linux to run the example dataset.
 
 ## 📁 Directory Structure
 
