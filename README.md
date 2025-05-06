@@ -136,7 +136,7 @@ cd COMBINE
 
 ### Install Dependencies
 
-The analysis pipeline requires Python 3.9 and several packages. It is recommended to install these in a dedicated conda environment:
+The analysis pipeline uses Python 3.9 and several packages. It is recommended to install these in a dedicated conda environment:
 
 ```bash
 # First create base environment with Python and standard packages
@@ -151,14 +151,16 @@ conda install numpy pandas scipy ipython
 Make sure your directory structure follows this pattern:
 
 ```
-COMBINE/
+COMBINE/Library 2
 ├── bc_extraction.py
 ├── count_barcodes.py
 ├── match_barcodes.py
-├── effector_details.csv
+├── library/
+│   ├── Library2_members.csv
+│   └── Library2_sequences.fasta
 └── fastqs/
     ├── nanopore/ # For nanopore barcode mapping fastqs
-    └── unmerged/ # For raw NGS fastqs
+    └── NGS/      # For raw NGS fastqs
 ```
 
 ## Usage
@@ -192,7 +194,7 @@ python bc_extraction.py
    - Creates a comprehensive mapping table (mappedBCs.csv)
    - Removes duplicates to ensure data integrity
 
-This step creates `mappedBCs.csv` containing barcode-to-effector mappings.
+This step creates `mappedBCs_filt.csv` containing filtered barcode-to-effector mappings.
 
 ### Step 2: Barcode Counting from NGS Data
 
@@ -231,7 +233,7 @@ This step produces `BCTable.csv` with barcode counts across samples.
 The `match_barcodes.py` script integrates the data from Steps 1 and 2 and calculates enrichment scores for effector combinations.
 
 ```bash
-python match_barcodes.py --barcode_table BCTable.csv --mapped_bcs mappedBCs.csv --effector_details effector_details.csv --output_dir ./data
+python match_barcodes.py --barcode_table BCTable.csv --mapped_bcs mappedBCs_filt.csv --effector_details library/Library2_members.csv --output_dir ./data
 ```
 
 #### Process
@@ -259,10 +261,40 @@ The script generates multiple output files:
 - `CD81_Day0_normalized.csv`: Normalized counts and enrichment scores for CD81 at 5 days with doxycycline
 - `CD81_Day12_normalized.csv`: Normalized counts and enrichment scores for CD81 at 12 days memory
 
+## Test Data
+
+The repository includes a small subset of test data to validate the pipeline functionality. These subsets contain approximately 100,000 NGS reads each or 10,000 Nanopore reads each, which is sufficient to demonstrate the workflow while keeping repository size manageable.
+
+### Test Data Structure
+
+- `fastqs/nanopore/`: Contains subsetted Nanopore FASTQ files for barcode extraction
+- `fastqs/NGS/`: Contains subsetted NGS FASTQ files for barcode counting
+- `library/`: Contains effector information for mapping
+
+### Running Tests
+
+You can test the full pipeline with the included test data using these commands:
+
+```bash
+# Navigate to the Library 2 directory
+cd Library\ 2
+
+# Step 1: Extract barcodes from Nanopore data
+python bc_extraction.py
+
+# Step 2: Count barcodes from NGS data
+python count_barcodes.py
+
+# Step 3: Match barcodes and calculate enrichment
+python match_barcodes.py --barcode_table BCTable.csv --mapped_bcs mappedBCs_filt.csv --effector_details library/Library2_members.csv --output_dir ./data --min_reads_per_bin 0 --min_reads_per_rep 0
+```
+
+For test data, we set minimum read thresholds to 0 to ensure all mapped barcodes are included in the analysis.
+
 ## Requirements
 
-- Python 3.6+
-- Required packages: numpy, pandas, scipy, statsmodels, regex
+- Python 3.9+
+- Required packages: numpy, pandas, scipy, ipython
 - External tools:
   - cutadapt
   - minimap2
@@ -276,3 +308,4 @@ The script generates multiple output files:
 - Error rate parameters can be adjusted for different levels of sequence stringency
 - Homopolymer filtering removes barcodes that may contain sequencing errors
 - Effector combinations are sorted by protein length for consistent organization
+- All intermediate files are stored in temporary directories and cleaned up automatically
