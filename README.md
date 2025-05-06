@@ -151,7 +151,7 @@ conda install numpy pandas scipy ipython
 Make sure your directory structure follows this pattern:
 
 ```
-COMBINE/Library 2
+COMBINE/Library 2/
 ├── bc_extraction.py
 ├── count_barcodes.py
 ├── match_barcodes.py
