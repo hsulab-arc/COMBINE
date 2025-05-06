@@ -136,43 +136,14 @@ cd COMBINE
 
 ### Install Dependencies
 
-The analysis pipeline requires Python 3.6+ and several packages. You can install them using pip:
-
-```bash
-pip install numpy pandas scipy statsmodels regex
-```
-
-For the external tools needed by the pipeline:
-
-```bash
-# Install cutadapt
-pip install cutadapt
-
-# Install minimap2
-conda install -c bioconda minimap2
-# Or download from https://github.com/lh3/minimap2/releases
-
-# Install fastp
-conda install -c bioconda fastp
-# Or download from https://github.com/OpenGene/fastp/releases
-
-# Install seqfu
-conda install -c bioconda seqfu
-# Or download from https://github.com/telatin/seqfu2/releases
-```
-
-Alternatively, you can create a dedicated conda environment:
+The analysis pipeline requires Python 3.9 and several packages. It is recommended to install these in a dedicated conda environment:
 
 ```bash
 # First create base environment with Python and standard packages
-conda create -n combine python=3.9 numpy pandas scipy
+conda create -n combine python=3.9
 conda activate combine
-
-# Then install bioinformatics tools one by one
-conda install -c bioconda cutadapt
-conda install -c bioconda minimap2
-conda install -c bioconda fastp
-conda install -c bioconda seqfu
+conda install -c bioconda -c conda-forge cutadapt minimap2 fastp seqfu
+conda install numpy pandas scipy
 ```
 
 ### Directory Structure
