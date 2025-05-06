@@ -143,7 +143,7 @@ The analysis pipeline requires Python 3.9 and several packages. It is recommende
 conda create -n combine python=3.9
 conda activate combine
 conda install -c bioconda -c conda-forge cutadapt minimap2 fastp seqfu
-conda install numpy pandas scipy
+conda install numpy pandas scipy ipython
 ```
 
 ### Directory Structure
