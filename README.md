@@ -309,3 +309,16 @@ For test data, we set minimum read thresholds to 0 to ensure all mapped barcodes
 - Homopolymer filtering removes barcodes that may contain sequencing errors
 - Effector combinations are sorted by protein length for consistent organization
 - All intermediate files are stored in temporary directories and cleaned up automatically
+
+## Citations
+
+If you use this software in your research, please cite:
+
+**For the COMBINE pipeline itself:**
+- GitHub repository: https://github.com/hsulab-arc/COMBINE
+
+**For the tools used:**
+- **Cutadapt**: Martin M. (2011) Cutadapt removes adapter sequences from high-throughput sequencing reads. EMBnet.journal, 17(1):10-12. https://doi.org/10.14806/ej.17.1.200
+- **Minimap2**: Li H. (2018) Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics, 34:3094-3100. https://doi.org/10.1093/bioinformatics/bty191
+- **fastp**: Chen S, Zhou Y, Chen Y, Gu J. (2018) fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics, 34(17):i884-i890. https://doi.org/10.1093/bioinformatics/bty560
+- **SeqFu**: Telatin A, Fariselli P, Birolo G. (2021) SeqFu: A Suite of Utilities for the Robust and Reproducible Manipulation of Sequence Files. Bioengineering, 8(5):59. https://doi.org/10.3390/bioengineering8050059
