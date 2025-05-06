@@ -165,7 +165,7 @@ Alternatively, you can create a dedicated conda environment:
 
 ```bash
 # First create base environment with Python and standard packages
-conda create -n combine python=3.8 numpy pandas scipy
+conda create -n combine python=3.9 numpy pandas scipy
 conda activate combine
 
 # Then install bioinformatics tools one by one
