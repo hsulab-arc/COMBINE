@@ -168,11 +168,9 @@ for i, file in enumerate(files):
     EF2 = mapEF2(file)
     BCs = findBCs(file)
     if EF1 is None or EF2 is None or BCs is None:
-        shutil.move(file, 'fastqs/mapped')
         clear_output()
         continue
     mappedBCs = pd.concat((mappedBCs, mapBCs(EF1, EF2, BCs)), axis=0)
-    shutil.move(file, 'fastqs/mapped')
     #mappedBCs.to_csv('mappedBCs.csv')
     clear_output()
 
