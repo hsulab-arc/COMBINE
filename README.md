@@ -156,7 +156,9 @@ COMBINE/
 ├── count_barcodes.py
 ├── match_barcodes.py
 ├── effector_details.csv
-└── data/
+└── fastqs/
+    ├── nanopore/ # For nanopore barcode mapping fastqs
+    └── unmerged/ # For raw NGS fastqs
 ```
 
 ## Usage
