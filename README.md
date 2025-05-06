@@ -164,8 +164,15 @@ conda install -c bioconda seqfu
 Alternatively, you can create a dedicated conda environment:
 
 ```bash
-conda create -n combine python=3.8 numpy pandas scipy statsmodels regex cutadapt minimap2 fastp seqfu
+# First create base environment with Python and standard packages
+conda create -n combine python=3.8 numpy pandas scipy
 conda activate combine
+
+# Then install bioinformatics tools one by one
+conda install -c bioconda cutadapt
+conda install -c bioconda minimap2
+conda install -c bioconda fastp
+conda install -c bioconda seqfu
 ```
 
 ### Directory Structure
