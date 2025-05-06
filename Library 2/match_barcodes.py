@@ -58,17 +58,35 @@ def match_barcodes(barcode_table_path, mapped_bcs_path, effector_details_path,
     os.makedirs(output_dir, exist_ok=True)
     
     # Reading in effector details and creating a list sorted by length
-    efDeets = pd.read_csv(effector_details_path)
-    efDeets.sort_values('Length (aa)', inplace=True)
-    sortedEffs = list(efDeets['Protein'])
-    efDeets = efDeets.set_index('Protein')
-    efDeets['Mods'] = efDeets['Mods'].astype(str)
+    try:
+        efDeets = pd.read_csv(effector_details_path)
+        efDeets.sort_values('Length (aa)', inplace=True)
+        sortedEffs = list(efDeets['Protein'])
+        efDeets = efDeets.set_index('Protein')
+        efDeets['Mods'] = efDeets['Mods'].astype(str)
+    except Exception as e:
+        print(f"Warning: Could not properly load effector details: {e}")
+        # Create a fallback for effector details
+        sortedEffs = []
     
     # Reading in barcode to effector pairings
-    mappedBCs = pd.read_csv(mapped_bcs_path, index_col=2, usecols=[1, 2, 3])
+    try:
+        mappedBCs = pd.read_csv(mapped_bcs_path, index_col=2, usecols=[1, 2, 3])
+        # If we don't have a valid sortedEffs list, create it from the mappedBCs
+        if not sortedEffs:
+            unique_ef1 = sorted(mappedBCs['EF1'].unique())
+            unique_ef2 = sorted(mappedBCs['EF2'].unique())
+            sortedEffs = sorted(list(set(unique_ef1 + unique_ef2)))
+    except Exception as e:
+        print(f"Error loading mapped barcodes: {e}")
+        return None, None
     
     # Reading in BC counts table
-    countedBCs = pd.read_csv(barcode_table_path, index_col=0)
+    try:
+        countedBCs = pd.read_csv(barcode_table_path, index_col=0)
+    except Exception as e:
+        print(f"Error loading barcode counts: {e}")
+        return None, None
     
     # Joining counted BCs to mapped BCs, keeping only BCs that were mapped
     foundBCs = countedBCs.join(mappedBCs, how='inner')
@@ -85,7 +103,7 @@ def match_barcodes(barcode_table_path, mapped_bcs_path, effector_details_path,
     foundBCs = foundBCs.reset_index().set_index(['EF1', 'EF2', 'BC'])
     
     # Summing over EF1 and EF2 combinations
-    EFTable = foundBCs.groupby(level=['EF1', 'EF2']).sum()
+    EFTable = foundBCs.groupby(level=['EF1', 'EF2'], observed=True).sum()
     
     # Save raw counts output
     EFTable.to_csv(f"{output_dir}/raw_counts.csv")
@@ -104,6 +122,10 @@ def match_barcodes(barcode_table_path, mapped_bcs_path, effector_details_path,
             pattern = re.compile(g+r"rep\w+_"+t+"_")
             matches = [name for name in EFTable.columns.to_list() if pattern.match(name)]
             
+            if not matches:
+                print(f"No data found for gene {g} and timepoint {t}. Skipping.")
+                continue
+                
             # Makes subtable for experimental condition
             sub = EFTable.loc[:, matches]
             
@@ -113,20 +135,57 @@ def match_barcodes(barcode_table_path, mapped_bcs_path, effector_details_path,
             sub.columns = new_column_names
             
             # Dropping pairs with < min_reads_per_bin in any bin
-            sub = sub.loc[(sub >= min_reads_per_bin).all(axis=1), :]
+            if min_reads_per_bin > 0:
+                sub = sub.loc[(sub >= min_reads_per_bin).all(axis=1), :]
             
-            # Summing reads from each rep
-            sub['sum1'] = sub.loc[:, ['rep1_HIGH', 'rep1_LOW']].sum(axis=1)
-            sub['sum2'] = sub.loc[:, ['rep2_HIGH', 'rep2_LOW']].sum(axis=1)
+            # Check for required columns and adapt calculation based on available data
+            available_cols = set(new_column_names)
             
-            # Dropping pairs with < min_reads_per_rep then normalizing across each bin
-            sub = sub.loc[(sub['sum1'] >= min_reads_per_rep) & (sub['sum2'] >= min_reads_per_rep), new_column_names]
-            sub = sub.div(sub.sum(axis=0), axis=1)
+            has_rep1_high = 'rep1_HIGH' in available_cols
+            has_rep1_low = 'rep1_LOW' in available_cols
+            has_rep2_high = 'rep2_HIGH' in available_cols
+            has_rep2_low = 'rep2_LOW' in available_cols
             
-            # Calculating HIGH/LOW ratio and geometric average
-            sub['rep1_R'] = sub['rep1_HIGH'] / sub['rep1_LOW']
-            sub['rep2_R'] = sub['rep2_HIGH'] / sub['rep2_LOW']
-            sub['avg_R'] = (sub['rep1_R'] * sub['rep2_R']) ** (1/2)
+            # Handle sum1 calculation - only if rep1 data exists
+            if has_rep1_high and has_rep1_low:
+                sub['sum1'] = sub.loc[:, ['rep1_HIGH', 'rep1_LOW']].sum(axis=1)
+            
+            # Handle sum2 calculation - only if rep2 data exists
+            if has_rep2_high and has_rep2_low:
+                sub['sum2'] = sub.loc[:, ['rep2_HIGH', 'rep2_LOW']].sum(axis=1)
+            
+            # Apply filters based on available data
+            if min_reads_per_rep > 0:
+                if 'sum1' in sub.columns and 'sum2' in sub.columns:
+                    sub = sub.loc[(sub['sum1'] >= min_reads_per_rep) & (sub['sum2'] >= min_reads_per_rep), new_column_names]
+                elif 'sum1' in sub.columns:
+                    sub = sub.loc[sub['sum1'] >= min_reads_per_rep, new_column_names]
+                elif 'sum2' in sub.columns:
+                    sub = sub.loc[sub['sum2'] >= min_reads_per_rep, new_column_names]
+            
+            # Normalize if we have data
+            if not sub.empty:
+                sub = sub.div(sub.sum(axis=0), axis=1)
+            
+            # Calculate ratios if possible
+            if has_rep1_high and has_rep1_low:
+                sub['rep1_R'] = sub['rep1_HIGH'] / sub['rep1_LOW']
+            
+            if has_rep2_high and has_rep2_low:
+                sub['rep2_R'] = sub['rep2_HIGH'] / sub['rep2_LOW']
+            
+            # Calculate average ratio
+            if 'rep1_R' in sub.columns and 'rep2_R' in sub.columns:
+                sub['avg_R'] = (sub['rep1_R'] * sub['rep2_R']) ** (1/2)
+            elif 'rep1_R' in sub.columns:
+                sub['avg_R'] = sub['rep1_R']  # Just use rep1 if rep2 not available
+            elif 'rep2_R' in sub.columns:
+                sub['avg_R'] = sub['rep2_R']  # Just use rep2 if rep1 not available
+            
+            # Skip conditions with no ratio data
+            if 'avg_R' not in sub.columns:
+                print(f"Could not calculate enrichment ratio for gene {g} and timepoint {t}. Skipping.")
+                continue
             
             # Adding to results dict
             results[(g, t)] = sub

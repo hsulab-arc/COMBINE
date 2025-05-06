@@ -147,7 +147,7 @@ def mapBCs(EF1, EF2, BCs):
 
 
 # Ensure mapped directory exists
-os.makedirs('fastqs/mapped', exist_ok=True)
+#os.makedirs('fastqs/mapped', exist_ok=True)
 
 # Mapping BCs
 
